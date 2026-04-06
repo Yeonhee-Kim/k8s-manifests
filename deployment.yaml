@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autoever-platform
+  namespace: app
+  labels:
+    app: autoever-web
+spec:
+  replicas: 2 # 가용성을 위해 2개
+  selector:
+    matchLabels:
+      app: autoever-web
+  template:
+    metadata:
+      labels:
+        app: autoever-web
+    spec:
+      serviceAccountName: platform-viewer
+      containers:
+      - name: platform
+        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env: # RDS 접속 정보
+        - name: DB_HOST
+          value: "autoever-db.c1em2swskomv.ap-northeast-2.rds.amazonaws.com"
+        - name: DB_USER
+          value: "admin"
+        - name: DB_PASS
+          value: "qazwsx64"
+        - name: DB_NAME
+          value: "guestbook"
+        resources:
+          requests:
+            cpu: "200m"    # 실제 평균 사용량 기준으로 설정
+            memory: "280Mi"
