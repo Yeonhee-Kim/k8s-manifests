@@ -6,7 +6,7 @@ metadata:
   labels:
     app: autoever-web
 spec:
-  replicas: 3 # 가용성을 위해 2개
+  replicas: 2 # 가용성을 위해 2개
   selector:
     matchLabels:
       app: autoever-web
