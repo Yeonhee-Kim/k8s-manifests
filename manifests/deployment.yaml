@@ -18,7 +18,7 @@ spec:
       serviceAccountName: platform-viewer
       containers:
       - name: platform
-        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:5a8d1109d89f6dc4555d16cb2be116e8a410efc9
+        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:0b44a5acc8da25a2d2951d1a37988b3a9bce9a2a
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
