@@ -18,7 +18,8 @@ spec:
       serviceAccountName: platform-viewer
       containers:
       - name: platform
-        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:5a8d1109d89f6dc4555d16cb2be116e8a410efc9        imagePullPolicy: Always
+        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:5a8d1109d89f6dc4555d16cb2be116e8a410efc9
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         # 헬스체크 경로 추가
