@@ -18,10 +18,22 @@ spec:
       serviceAccountName: platform-viewer
       containers:
       - name: platform
-        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:5a8d1109d89f6dc4555d16cb2be116e8a410efc9
-        imagePullPolicy: Always
+        image: 471112567060.dkr.ecr.ap-northeast-2.amazonaws.com/autoever-guestbook:5a8d1109d89f6dc4555d16cb2be116e8a410efc9        imagePullPolicy: Always
         ports:
         - containerPort: 5000
+        # 헬스체크 경로 추가
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10 # 앱 실행 후 10초 뒤부터 체크 시작
+          periodSeconds: 15       # 15초마다 한 번씩 찔러보기
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 5000
+          initialDelaySeconds: 5  # 앱 실행 후 5초 뒤부터 체크 시작
+          periodSeconds: 10
         env: # RDS 접속 정보
         - name: DB_HOST
           value: "autoever-db.c1em2swskomv.ap-northeast-2.rds.amazonaws.com"
